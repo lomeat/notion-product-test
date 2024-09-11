@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Продуктовая проверка</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(249, 228, 188, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fff81376-345b-8094-8a8c-dddab26bb925" class="page sans"><header><h1 class="page-title">Продуктовая проверка</h1><p class="page-description"></p></header><div class="page-body"><p id="810ffa57-aa18-4a8e-8236-cea9e832c915" class="">Что работают ли фичи со стороны пользователя</p><p id="fff81376-345b-803a-acf5-ca30ae025e4c" class="">Ниже указано лишь то, что не работает. Если что-то работает, то это не указано.</p><nav id="3daa24ec-2161-4efa-8088-92c8d8e16f40" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#259bcf08-2e6a-4695-8d87-46af4ccc3e2a">Первый вход</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4b0627ad-bc2b-4073-9dac-8897d794f68d">Главная страница</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9d81e718-ef1d-43c1-b85a-89a84b1a2295">Баннеры</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4bf9e8b0-07d8-4b5c-accd-98caf569590d">Фильтры</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c66993ee-b231-43ab-948e-601fb008c820">Игра</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8967d649-a8de-4d8e-8438-a5f2a5eeb77c">Футер</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#93f7507f-694d-4591-b3d8-a12c551829ea">Авторизация</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#de3931ba-2fec-4a8f-b0f4-a730100f5883">Регистрация</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0071ec60-a4a4-408f-bab6-ac4ba3432b15"><mark class="highlight-teal">Через почту</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8759e9c1-6c6f-4b84-9b5c-c0b34e919acd"><mark class="highlight-red">Через телефон</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f54d6f68-5c34-4d4e-bd10-6c0af2977da5">Вход</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fff81376-345b-8026-8c53-c1766f6606d4"><mark class="highlight-teal">Через почту</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d561dcbd-30b3-47a0-baf9-162bb0e31074"><mark class="highlight-red">Через телефон</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#44d2cd4d-1de4-450b-8776-48d32e848ab1">Профиль</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#98b42855-e791-4a9c-95aa-635c8974c8b4">Персонализация</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0fe44b67-4788-47e9-846f-1dda9a876c51">Безопасность</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8b1e64b-82de-45aa-aa8b-97840c077c08">Настройки пользователя</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#72b5bc20-3451-4236-9538-adf434a8ebca">Уведомления</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6894ade4-32db-46d6-afd0-fa71a843b0e3">Кошелек</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d2b3f520-6a7c-409d-86e7-3c19a595ad15"><mark class="highlight-red">Фиат деп</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#253fc240-ece3-49ae-bc6a-54a6a9920ecb"><mark class="highlight-red">Фиат вывод</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2dd863a4-fe7b-4d88-b6ef-aa0361e250e0">крипта деп</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0bc37de9-7715-4eb5-bf14-7538c71689bc">крипта вывод</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ee8725fb-86b9-4e3c-a649-f0ad49b676d9">История</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b9738712-fd2a-4619-9d03-15ded344f880">Бонусы</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4237d0d1-71b1-491e-a90d-653cd16ff327">Каталог</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3564d339-70b4-413f-a1a6-eab6186bde1e">кэшбек</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#88cfcf5e-f522-43ca-86cc-080d321b26e2">Деп</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bd724bcd-e014-44b0-8c63-6208963c112c">деп с бездепом в параллели</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#256d3811-c2f7-4642-8ba5-607f308888be">flow отыгрыша бонуса</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#79a0d119-0d78-4ce9-812e-b7c65d9f56fc">фриспины</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1728c235-db38-4438-b107-ac788a389228">промокод</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fff81376-345b-8090-af87-cb105af37fd9">Уведомления</a></div></nav><h1 id="259bcf08-2e6a-4695-8d87-46af4ccc3e2a" class="">Первый вход</h1><figure id="878816bf-53d6-4c15-9fc8-1386b1b93de8" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_12.48.45.png"><img style="width:407px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_12.48.45.png"/></a></figure><p id="f641d164-6a8b-4b4c-972e-b63e1a29d8c5" class="">Картинки очень долго грузятся, есть провисания. Скелетон неправильно работает — ощущение, что все зависло. Если телефон или интернет будут хуже, то все повиснет к чертям. Нужно позже проверить со слабого телефона.</p><figure id="9e9a55df-48e5-48b3-8319-07801c495d49"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_12.49.49.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/f92368e1-fc9a-4215-a81f-e4eaded7e922/CleanShot_2024-08-30_at_12.49.49.mp4</a></div></figure><p id="d7ea4aec-8707-4ddb-9368-ee4401fca7b0" class="">Вместо черного экрана должен быть скелетон, который появляется только при наличии данных почему-то. </p><p id="1fe721b3-01a2-4134-95fa-186476608ce0" class="">Можно выделить любой текст на сайте - такого быть не должно.</p><p id="18437281-7214-443d-aa6c-a7d77a4febed" class="">Так же при заходе на страницу заново все грузится как в первый раз, как будто ничего не кэшируется</p><p id="a981a89c-787f-48dd-98d6-8b937272b5ce" class="">Постоянно прыгают иконки и картинки, нет ощущения целостности интерфейса</p><h1 id="4b0627ad-bc2b-4073-9dac-8897d794f68d" class="">Главная страница</h1><p id="7ce8bb3b-1875-483e-932a-9db4a9616906" class="">Задний фон страшно пестрит, только еще больше нагружая</p><p id="10df2533-6196-4573-8598-585155f5a8c6" class="">Только синие кнопки имеют ховеры и клики, все остальные почемуто статичны</p><p id="2317b49f-f6ae-403c-b299-8a48bfe1fbc9" class="">В целом иконки как правило “мерцают” когда с чемто взаимодействуешь, как будто все перерисовывается заново каждый раз, тут бы проверить perfomance</p><p id="a2524f0e-4c97-4630-9457-d06afd4f23f0" class="">
+</p><h2 id="9d81e718-ef1d-43c1-b85a-89a84b1a2295" class="">Баннеры</h2><p id="533e49a0-7271-4888-bfdb-a1014954f137" class="">Просто заглушка из картинок без моб верстки</p><h2 id="4bf9e8b0-07d8-4b5c-accd-98caf569590d" class="">Фильтры</h2><figure id="d7f7cd27-2e9a-4667-ab4a-31254a458049" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.43.30.png"><img style="width:326.9886169433594px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.43.30.png"/></a></figure><p id="e2c3717b-0603-4c63-a366-1c7ad474f179" class="">Иконка “настольные игры” всегда белая, а должна быть еще и серая</p><figure id="80de01a1-3c95-4df7-ad9a-5190811ecfa9" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.53.48.png"><img style="width:360.9375px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.53.48.png"/></a></figure><p id="5da1e62f-ddb1-447a-b248-0eecdfa9ccb5" class="">При длинном названии категории, все может поехать на 2 строки</p><p id="2db59b69-cc07-4d78-828b-fe950c9d57e5" class="">
+</p><p id="db4cdff0-a315-49e4-96f5-ac40d4575b86" class="">
+</p><h1 id="c66993ee-b231-43ab-948e-601fb008c820" class="">Игра</h1><figure id="35f738ff-ab82-4827-b924-af44ba587624" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.47.27.png"><img style="width:587.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.47.27.png"/></a></figure><p id="349da766-bfd5-49c3-a76c-d078a7595de8" class="">Неправильная кнопка лайка</p><figure id="9d265ecd-747f-480e-b5a1-45444ff0d9ee"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.48.36.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/3f885ddc-7ca3-4fe7-8325-538d4e0b2e63/CleanShot_2024-08-30_at_15.48.36.mp4</a></div></figure><p id="c3095de9-1c0a-40b3-b6aa-99b4e930ab3c" class="">Картинка уже есть и загружена, но зачемто грузится заново</p><figure id="f4a5a772-5e09-47a6-82bc-d73b9155cb74" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.09.43.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.09.43.png"/></a></figure><p id="a8fdee8d-fd0a-4b39-b102-cae2deac53ed" class="">Убрать игры с тегами</p><p id="148f41d6-7a69-4eed-a63d-d22c14282678" class="">В принципе не работают игры Sloteigrator при игре на деньги, только Vamos (я знаю, что это изза stage, но не написать не могу — так или иначе игры как-то надо будет протестировать)</p><p id="bcea15a9-8af8-4ef0-866d-59d937d3e114" class="">Нет ограничения в играх по странам и валютам</p><p id="17f2d28a-73c6-40d5-a6f7-164a6280c1ff" class="">Игры вамоса бесят тем, что постоянно открываются на весь экран</p><h1 id="8967d649-a8de-4d8e-8438-a5f2a5eeb77c" class="">Футер</h1><figure id="aa7d84c4-721a-44c3-ac79-2d2355c39fd9" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.41.58.png"><img style="width:466.9886169433594px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.41.58.png"/></a></figure><p id="f9ff6ac7-b327-46c0-8393-f42941eb8134" class="">Заглушка, из реальных данных там только язык, профиль и terms</p><figure id="d793851b-9290-43b4-ace0-7fbb0dcf554e"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.55.45.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/83f11bba-5a98-4d86-972a-69108068a511/CleanShot_2024-08-30_at_15.55.45.mp4</a></div></figure><p id="183adbd0-3556-4abf-83e3-beec1b0be485" class="">Невозможно сменить язык</p><figure id="554a1037-fa7d-45af-b754-9be89c784316"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.59.28.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/f55be83d-5655-45f2-ab27-9c3e11c017d8/CleanShot_2024-08-30_at_15.59.28.mp4</a></div></figure><p id="0ac0044c-c19e-4d80-b7a2-e4d9aa983bd1" class="">Язык не сохраняется за пользователем</p><h1 id="93f7507f-694d-4591-b3d8-a12c551829ea" class="">Авторизация</h1><p id="a9ec5b7d-7e1c-4074-8f16-d2f813372ba6" class="">Все, что связано с входом в систему</p><figure id="58adff23-91ce-45fd-bd33-7a46e952481f"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.45.10.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/e9e6f10e-2c0a-4dde-91b9-e8c9f40a9de7/CleanShot_2024-08-30_at_15.45.10.mp4</a></div></figure><p id="ad9cc490-2afe-47a9-bc82-9ec99a2f9dcc" class="">Непонятный лишний скролл</p><figure id="a0030232-2ec8-466a-859c-0b48c52b9f2d" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.06.39.png"><img style="width:517.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.06.39.png"/></a></figure><p id="24f20e5c-74b7-4fa6-8b98-adc75c70fdc7" class="">Нет перевода и странный крестик без стрелки назад при восстановлении пароля</p><h2 id="de3931ba-2fec-4a8f-b0f4-a730100f5883" class="">Регистрация</h2><figure id="2d673f3e-c306-415f-b666-a403c797221e" class="image" style="text-align:left"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_13.00.14.png"><img style="width:444.9715881347656px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_13.00.14.png"/></a></figure><p id="239a7859-d843-4f36-991e-a350ec443e01" class="">Некорректное отображение “получи 200…”, представлено картинкой, а должен быть текст</p><figure id="ee79b266-b38e-42e5-aa39-7366583efa71" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.45.55.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.45.55.png"/></a></figure><p id="47382837-d84e-4ca0-8ebc-79e8d1346740" class="">Может не загрузиться картинка</p><h3 id="0071ec60-a4a4-408f-bab6-ac4ba3432b15" class=""><mark class="highlight-teal">Через почту</mark></h3><figure id="9df957bc-f682-4434-9211-2053924fb7e6" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_14.38.02.png"><img style="width:483.9772644042969px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_14.38.02.png"/></a></figure><p id="43d7c009-78f5-49e8-a94e-b0aff598980e" class="">Нет стрелочки вернуться назад, только закрыть все окно</p><p id="316b8005-f329-458a-816b-bed73f06b2e3" class="">Далее все ок, регистрация происходит</p><h3 id="8759e9c1-6c6f-4b84-9b5c-c0b34e919acd" class=""><mark class="highlight-red">Через телефон</mark></h3><figure id="b8d2deda-ea4d-416a-81ec-8292024e290d"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_14.34.24.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/48e7fa27-50d6-448c-8693-a82b15d83e19/CleanShot_2024-08-30_at_14.34.24.mp4</a></div></figure><p id="ced9a3eb-bad3-433f-a0c3-4c17c28842cf" class="">После ввода кода ничего не происходит, нет текста перевода</p><p id="fff81376-345b-801a-b57f-ee7621179348" class="">Нет стрелочки назад, чтобы вернуться на экран решистрации, только закрыть окно полностью</p><p id="f0d8a3da-6eab-435e-bf6e-111e2d776f13" class="">Нельзя зарегистрироваться через телефон, так же не работают номера другие стран</p><p id="569ef9af-adf5-4f7e-afc5-6f18d8640014" class="">(но можно ввести 000000 в поле кода с любым номером и номер зарегается)</p><h2 id="f54d6f68-5c34-4d4e-bd10-6c0af2977da5" class="">Вход</h2><figure id="1d0a0394-c08a-42ed-8699-9be6de8f2680"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_12.58.13.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/3c7bc4a9-62dc-475b-bbe1-d65b9b1aded7/CleanShot_2024-08-30_at_12.58.13.mp4</a></div></figure><p id="4c9a56bd-e78b-4720-a677-886175bc80a3" class="">Иконки меняют цвет при наведении курсора, хотя не должны вообще реагировать.</p><figure id="e6276d84-bf82-43cd-8e80-16e10dd42ae1"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_13.01.20.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/4bf10c66-4c80-46c9-9d0a-8fa9e032b1b6/CleanShot_2024-08-30_at_13.01.20.mp4</a></div></figure><p id="a2e73d9d-a796-428f-b2c7-25c472a9a669" class="">Происходит “скачок” при смене типа логина</p><p id="efafa4d5-82fb-473e-8712-558c1d9be2ff" class="">Так же кнопка “Продолжить” должна быть disabled, тк ничего не введено</p><h3 id="fff81376-345b-8026-8c53-c1766f6606d4" class=""><mark class="highlight-teal">Через почту</mark></h3><p id="53e69053-5047-44d5-8ac2-3aee68976262" class="">все ок</p><h3 id="d561dcbd-30b3-47a0-baf9-162bb0e31074" class=""><mark class="highlight-red">Через телефон</mark></h3><figure id="ab07ed33-d40d-4e14-9c3c-cb2dca969c88"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_14.54.33.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/99a2557a-b687-42fc-9c6e-48bcc60dadaa/CleanShot_2024-08-30_at_14.54.33.mp4</a></div></figure><p id="63deccaa-6f60-42fb-9778-bcab49e60e6f" class="">При смене страны, поле сразу сигнализирует, что введено неправильно, хотя я даже не успел ввести ничего. При смене страны часть кода переносится в поле ввода. </p><p id="0548e75e-07d1-40b8-8c40-566ff54a4255" class="">А, при логине, вообще открывается окно подтверждения, хотя не должно</p><p id="fb73816f-8c3a-45a0-b972-3d9b76e3df35" class="">Не получилось войти</p><figure id="ea4979cc-2ffe-42aa-b0c0-d3041f4b3daf" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.28.04.png"><img style="width:556.9885864257812px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.28.04.png"/></a></figure><p id="f917ab15-ca64-492e-8225-abd66b45b5b9" class="">
+</p><h1 id="44d2cd4d-1de4-450b-8776-48d32e848ab1" class="">Профиль</h1><h2 id="98b42855-e791-4a9c-95aa-635c8974c8b4" class="">Персонализация</h2><p id="4c0e67e7-2aa6-4866-b7ad-a24bd2e13408" class="">Когда угодно могу менять любую дату, когда захочу, не ок</p><p id="3e0a80f4-e6e0-4659-8ba8-aea892428465" class="">Выбор даты неудобный - должен быть одноразовый выбор дня и месяца, а не раздельный</p><figure id="e104a25a-544a-4010-90d6-8947f4912e90" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.02.21.png"><img style="width:463.991455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.02.21.png"/></a></figure><p id="88d36a0d-b6ac-4a93-bcd9-01273a23bfa3" class="">Окно изменения аватарки не переведено</p><figure id="0eaac4cb-0598-463f-b012-69b9fc238e8d"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.13.43.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/aaf0ab64-169f-4bc8-8373-667f47a704f4/CleanShot_2024-08-30_at_15.13.43.mp4</a></div></figure><p id="809f4d79-2529-4919-9b58-446286183456" class="">Ввод никнейма жестко прибит к определенной ширине и не виден весь длинный никнейм + нельзя сохранить по enter</p><h2 id="0fe44b67-4788-47e9-846f-1dda9a876c51" class="">Безопасность</h2><figure id="1949b507-2818-4cc0-b2a1-0b788622812d"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.15.41.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/9103b0f3-e0cb-4736-956d-b29b57a4d146/CleanShot_2024-08-30_at_15.15.41.mp4</a></div></figure><p id="af2e5697-3ed8-4462-af73-337ae316b36a" class="">При смен почты, ничего не происходит, кажется, как будто бы почта сразу привязалась, хотя должно открыться окно, которе говорит, что было выслано письмо, как при регистрации</p><figure id="7516ca8d-b62e-4ea9-983f-884a17ad0ae4"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.17.17.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/e2ee3f6e-5c5e-4dde-8f74-07d162483a6a/CleanShot_2024-08-30_at_15.17.17.mp4</a></div></figure><p id="dc3d124b-a81f-4458-8aeb-eddd0be6bce2" class="">Если из письма потом открыть ссылку, то ничего не происходит, остается старая почта</p><figure id="17e39d1a-39c6-443a-a638-a04cbae380b3"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.18.04.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/bdf17f35-25f9-4374-beba-b38e307b3f48/CleanShot_2024-08-30_at_15.18.04.mp4</a></div></figure><p id="ee6f3560-96a5-4c53-abe8-8c7636b50ff4" class="">Такие же кривые баги с переносом номера, а так же не открывается окно подтверждения номера телефона, нельзя привязать новый телефон</p><figure id="fcc1271f-b136-47f7-b7a1-a3e9fb768ca2" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.19.09.png"><img style="width:490.9942932128906px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.19.09.png"/></a></figure><p id="f87a7e6e-5343-454a-84ca-1b3dd4f0eb07" class="">Очень странный крестик, не в том месте</p><p id="a7f121d1-3b0d-4422-bef0-428aa736c592" class="">Пароль изменить можно, но только через почту</p><p id="47ee2952-420f-42d0-8b44-b4b47eb13c83" class="">Нет перевода</p><p id="0813e3eb-008e-43d9-8b27-906ea2eafd57" class="">Через телефон так же должно быть можно, подтвердив код из СМС</p><figure id="d6b635f7-65ae-4409-9626-c2ea5f6e1aac"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.26.21.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/6f31caf3-468d-464e-b5c8-a8746320c421/CleanShot_2024-08-30_at_15.26.21.mp4</a></div></figure><p id="eb2cbe51-caef-4d24-83e5-c474da010b20" class="">Куда он отправляется, если нет почты (регистрация через телефон), и можно сбросить кд кнопки перезагрузкой страницы</p><h2 id="b8b1e64b-82de-45aa-aa8b-97840c077c08" class="">Настройки пользователя</h2><p id="013ce3f1-fb28-462a-a88d-cf3a2c495d32" class="">нет блока</p><h2 id="72b5bc20-3451-4236-9538-adf434a8ebca" class="">Уведомления</h2><p id="4e2e2c27-91c7-4414-b32f-7fea41fdb9d7" class="">нет блока, а должно быть <a href="https://www.figma.com/design/TdqM1zqAgHWA6ha1Ahob3t/PingWin-Stuff?node-id=1317-61205&amp;t=iiYVrjAHRVcrWtoR-4">https://www.figma.com/design/TdqM1zqAgHWA6ha1Ahob3t/PingWin-Stuff?node-id=1317-61205&amp;t=iiYVrjAHRVcrWtoR-4</a></p><h1 id="6894ade4-32db-46d6-afd0-fa71a843b0e3" class="">Кошелек</h1><figure id="c6819624-35b1-444b-bd6c-14abec3a7e36" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.10.45.png"><img style="width:506.9886169433594px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.10.45.png"/></a></figure><p id="5ad05ede-de69-4f17-bd5f-ab366d0217c1" class="">Нет перевода у смены валюты и оплаты картой</p><figure id="0f402bad-2db2-4a89-b173-5a7de86c0736"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.11.38.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/a010e456-f264-470a-a459-e52d8605faa4/CleanShot_2024-08-30_at_16.11.38.mp4</a></div></figure><p id="8d449896-e328-4a8e-83d9-67d0c91a1915" class="">Надо кликнуть на сам текст, иначе окно не откроется, закрыть кликнул мимо нельзя, только на элемент. С телефона вообще открыть не получается.</p><h2 id="d2b3f520-6a7c-409d-86e7-3c19a595ad15" class=""><mark class="highlight-red">Фиат деп</mark></h2><figure id="9e1e7c59-8b49-489c-ac97-dc520823536c" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.13.14.png"><img style="width:433.991455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.13.14.png"/></a></figure><p id="c161a384-3ee6-43bb-9f67-a487da65c9b4" class="">Ничего не переведено, блок бонуса старый</p><p id="9b8b92e1-c39d-4107-bf1f-76d3230de8b5" class="">Нет конвертации к курсу платежки</p><figure id="00aee103-b4f6-4441-948d-51c6f0a1b52f" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.14.40.png"><img style="width:435.9942932128906px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.14.40.png"/></a></figure><p id="f975e1d5-35dc-4570-bab3-d9eef5308bec" class="">Бонус рассчитывается неправильно, он не может быть больше чем 1,805*0.2=361</p><figure id="8340f99a-3210-4dad-b526-feb15edd334c"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.23.34.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/0b0cd9c8-f638-4805-b8e8-1bb3e9445a44/CleanShot_2024-08-30_at_16.23.34.mp4</a></div></figure><p id="f30c4593-bf2d-444b-9c8c-13dd03d31e33" class="">Очень долгая загрузка платежки, кажется, что ничего не работает, нет информации, что идет загрузка</p><p id="c68699d2-dc4a-4443-a402-4a34b167c237" class="">Нет реализации с ограничениями, могу активировать бонус, даже имея меньше минималки</p><p id="9eee2fb4-290d-480c-a88a-3f9aad504c32" class="">Далее платежка бесконечно висит, не могу произвести оплату</p><figure id="4f15cf63-1e2c-4d5c-977b-da216d9261f4"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.26.10.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/b8aae8c5-7391-468a-9ab1-fa99b6385829/CleanShot_2024-08-30_at_16.26.10.mp4</a></div></figure><h2 id="253fc240-ece3-49ae-bc6a-54a6a9920ecb" class=""><mark class="highlight-red">Фиат вывод</mark></h2><figure id="dc5b2b2f-117f-4823-9048-ce5b08453ab2"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.28.04.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/521ecf83-8c0d-4e52-820f-d91e1f9ef0c9/CleanShot_2024-08-30_at_16.28.04.mp4</a></div></figure><p id="5f102469-edce-441b-9212-b1014943dfda" class="">Нет перевода</p><p id="acad9b21-d81b-420f-b308-52ebbcde8670" class="">Почему комиссия и макс в гривнах, если стоит валюта евро</p><p id="01003976-15e0-4f7f-be7e-60a5435346ee" class="">Ничего не происходит по нажатию, а должна быть ошибка, что карта неправильная</p><p id="faad5cc9-9150-44be-82f6-01342fe7fb2e" class="">Для карты нет никакой валидации, что карта верная - любые цифры подходят</p><p id="66591e2a-3539-45cb-b743-6a460b4f5808" class="">Максимальное значение минусовое</p><p id="c8b9d579-2277-41b5-a1f8-c42b16e4dc25" class="">После клика вывод должен открыть чек хотя бы</p><figure id="819d54b7-ad22-49a6-a94e-284b4ce75f0c" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.47.11.png"><img style="width:517.96875px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.47.11.png"/></a></figure><h2 id="2dd863a4-fe7b-4d88-b6ef-aa0361e250e0" class="">крипта деп</h2><p id="3fd1121a-8d5b-411f-9a98-3326476553f0" class="">все ок, не было ток уведомлений вообще, но это понятно</p><h2 id="0bc37de9-7715-4eb5-bf14-7538c71689bc" class="">крипта вывод</h2><figure id="1b477f4e-af30-4635-96e8-ed88fa211a56" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.57.02.png"><img style="width:458.991455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.57.02.png"/></a></figure><p id="f1a4cefc-d661-4ffb-b95e-98d64b403754" class="">нет перевода</p><figure id="25e819d7-2974-41e8-a8fa-6f5d8a782fdd" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.48.18.png"><img style="width:509.98577880859375px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.48.18.png"/></a></figure><p id="9426696b-ad01-40b9-add8-9de31d7b9851" class="">нет комиссии, нет макс — не могу вывести</p><figure id="e4e414cf-a4eb-443a-a3e4-aab3ac30a90e"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_17.00.09.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/868851a2-6255-447d-a09e-9a676682b331/CleanShot_2024-08-30_at_17.00.09.mp4</a></div></figure><p id="100e6d67-bee5-4ed5-83bf-60def4cd1f12" class="">Кнопка растеклась между низом и блоком, хотя должна быть внизу</p><p id="fff81376-345b-809f-a1cf-c3a4fca92cad" class="">При клике не происходит никаких запросов</p><h2 id="ee8725fb-86b9-4e3c-a649-f0ad49b676d9" class="">История</h2><figure id="dbdf5fde-0509-4b28-a3ee-f3331afe044d"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.42.55.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/ae6c1178-4988-490c-94cc-dc340b0bf033/CleanShot_2024-08-30_at_16.42.55.mp4</a></div></figure><p id="2c2f9cba-b8f4-48a5-8b6f-70d4865b5d24" class="">Не имеет фикс высоты</p><p id="e70276df-6908-49e0-9598-66c782b4a315" class="">При открытии чека просто упало приложение (баур, какого черта у тебя нет проверок на ошибки, ты вообще try catch используешь? а “?” или “!” в проверке путей обьектов? есть проверки на null/undefined? вообще есть хоть какието проверки? признак плохой разработки, когда приложение в принципе может упасть из-за того, что сломался какой-то модуль)</p><p id="e31c3146-4483-478c-ad61-46027f81e096" class="">
+</p><p id="26ffefb2-f503-40e3-bd6c-34f0441bf3b1" class="">
+</p><h1 id="b9738712-fd2a-4619-9d03-15ded344f880" class="">Бонусы</h1><p id="ed5ca86d-9800-4c18-b0cc-222fad25336e" class="">При активированном бонусе, могу играть в любую игру - нет никакого ограничения, при этом деньги списываются с основном счета, который не видно изза активированного бонуса — неправильно, читайте доку</p><h2 id="4237d0d1-71b1-491e-a90d-653cd16ff327" class="">Каталог</h2><figure id="7de9c532-eb5a-4ecd-be5e-1270611cf7c7" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.36.05.png"><img style="width:688.366455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.36.05.png"/></a></figure><p id="9d5070e6-7290-41f2-b14a-010f2060b06c" class="">Растягивается все карточка, хотя название в одну строку и не должна растягиваться</p><figure id="01bf6f03-7fde-45aa-bd71-68918d16670a" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.50.11.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.50.11.png"/></a></figure><p id="1fbc4070-544c-4113-8a93-ca86a215bcde" class="">Бонусы страшно сжимаются, когда узкий экран, но еще не телефон, логично делать 2 столбца</p><figure id="42dbb2ee-07d3-499b-92fe-8043746322c9" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.51.27.png"><img style="width:621.9744262695312px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.51.27.png"/></a></figure><p id="ce6a8e32-7fa5-4841-a57d-e002536de613" class="">Это дизайн</p><figure id="7850dc9f-a7f8-40d9-a66c-600067fc8079" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.52.34.png"><img style="width:465.9942932128906px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_15.52.34.png"/></a></figure><p id="27170a55-717a-4fd4-a0f6-38d2e558e59f" class="">А это реальность</p><figure id="8edab693-ac18-463e-9613-b76ffb9706d8" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.34.17.png"><img style="width:395.9801025390625px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.34.17.png"/></a></figure><p id="d82d6172-2df7-4a04-bc53-cb3ba46bbab4" class="">Бонус не удалился из доступных, хотя давно истек</p><figure id="360c690b-a7a2-4ae9-81d2-2db8360d2f39"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.50.11.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/ffb91e6c-fd36-425b-aef1-235bb6e92bff/CleanShot_2024-08-30_at_16.50.11.mp4</a></div></figure><p id="af13d1f2-1e3a-4644-8c33-992c2f718a9d" class="">с телефона невозможно закрыть бонус</p><figure id="636f8610-b79b-40ca-8b2b-a54672999be4" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.39.53.png"><img style="width:459.9999694824219px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.39.53.png"/></a></figure><p id="80cb3353-8b76-4684-9844-60f3bf70e238" class="">все кнопки заблокированы, хотя активен сейчас другой бонус</p><figure id="35d257f4-0ae7-4a22-b030-e501e02db26f" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.13.44.png"><img style="width:688.366455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.13.44.png"/></a></figure><p id="396e879d-8749-4dcf-9f7f-376beb78da81" class="">если оператор как-то ошибся, то игрок может получить 2 идентичных бонуса, логично, что должен быть только один (мб сделать в принципе бонусы уникальными, чтобы нельзя было более никогда получить бонус, который уже был когдато активированным?)</p><figure id="839b8e96-9c01-4093-8b8a-2f006cbe4467" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.16.16.png"><img style="width:469.9999694824219px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.16.16.png"/></a></figure><p id="114fe3ed-f8f8-4437-bb9e-8454ca8cb99b" class="">В целом в карточке бонуса должно быть разделение на “Описание”, “Провайдеры” и тд</p><p id="d54e7ec1-2dcd-4f93-82ae-952fbf59f286" class="">Так же нет кнопки “играть” внизу карточки бонуса вместо “сжечь” — было указано в доке, не было в дизайне</p><figure id="d07eee81-8d4a-4288-ab33-22edeb1dc206" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.40.28.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.40.28.png"/></a></figure><p id="507505bb-a1da-47ed-8d5d-14f4077f8f32" class="">Отображается, что у меня 3 бонуса, хотя на самом деле 2</p><p id="aa174751-aed5-46c2-82e8-049e48e5a9d8" class="">Вообще кажется лучше убрать цифры вообще и оставить только красный кругляш, как знак того, что есть неиспользованные бонусы еще</p><figure id="fff81376-345b-8077-b6e8-fa7157f1303d" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.54.07.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.54.07.png"/></a></figure><p id="a103e1d5-e7df-47cb-8795-227e6868e4ab" class="">Красный кругляш есть, хотя бонусов вообще нет</p><h2 id="3564d339-70b4-413f-a1a6-eab6186bde1e" class="">кэшбек</h2><figure id="4606089d-7097-41d7-b2fc-c8a82ba8479c" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.51.00.png"><img style="width:432px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.51.00.png"/></a></figure><p id="fff81376-345b-8076-931e-eb6358c2c1df" class="">не написан мой депозит на 8 баксов, хотя в истории есть этот деп</p><figure id="5939bf00-b961-4882-bad5-2ffdadac5037" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.51.29.png"><img style="width:432px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.51.29.png"/></a></figure><figure id="9bbabe42-5ac9-4caf-a99c-ece9ec5fb97c" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.56.18.png"><img style="width:688.366455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.56.18.png"/></a></figure><p id="711be2de-0972-4061-81a2-1930436a439c" class="">Это дизайн</p><figure id="3a6c734b-b046-49c4-8c51-3053a8c528b3" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.57.26.png"><img style="width:380.9516906738281px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.57.26.png"/></a></figure><p id="c33590b6-868d-4bc9-91cc-820662f68739" class="">А это реальность</p><p id="fff81376-345b-807d-b6e6-e90330bce151" class="">И кстати, почему везде пробелы после чисел? Между числом и валютой. Никогда нигде мной не было сказано, что там должен быть пробел и такого нет ни на одном макете.</p><h2 id="88cfcf5e-f522-43ca-86cc-080d321b26e2" class="">Деп</h2><figure id="67ee8588-14aa-4153-a402-452d4daa5b5b"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.46.29.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/8920fcff-01e4-4959-9f46-75841ded8cf7/CleanShot_2024-08-31_at_16.46.29.mp4</a></div></figure><figure id="8937a74f-3345-4db8-b94e-cb2b2c6a4392" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.12.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.12.png"/></a></figure><p id="8b8ef7ba-b3fe-43e0-b200-b78c035d6e6a" class="">сделал перевод</p><figure id="d2162d3c-d6cb-45ce-b407-f7247dd3a9eb" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.28.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.28.png"/></a></figure><p id="0f72fbdc-aaec-46ea-b85b-3177d84eaf8b" class="">сначала ничего (помним про 3 минуты)</p><figure id="faab8d47-aa7c-4f88-95d8-140fbca85dc9" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.50.png"><img style="width:707.9971313476562px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.48.50.png"/></a></figure><p id="17da6aac-4266-4a4a-ba83-0aa291097917" class="">теперь висит обработка и я не могу активировать более ничего (хотя отказались от этой механики в угоду очереди изза вероятного долгого депозита)</p><figure id="da282540-3e16-41df-908e-3557e443d1d9"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.49.57.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/bdb2f547-b239-468d-b910-88cf684f5c4c/CleanShot_2024-08-31_at_16.49.57.mp4</a></div></figure><p id="495192fa-08fc-4657-9b52-9a7e5a543c44" class="">деньги пришли, но просто на счет</p><p id="4bb1892b-222a-4b7e-924c-f1c0c98e59d6" class="">Бонус просто исчез</p><p id="24b77e6c-5d74-42cc-a972-246f9e1ca337" class="">Итого, работает только бездеп, да и то неполностью</p><h2 id="bd724bcd-e014-44b0-8c63-6208963c112c" class="">деп с бездепом в параллели</h2><p id="91ea18e1-3288-4fc4-9e10-3c49023833ad" class="">активировал деп бонус, сделал деп на 8 (10) usdt trc 20</p><p id="7bc49429-d239-4867-8412-864cb140d782" class="">потом активировал бездеп бонус</p><figure id="3d6776e0-e051-4d86-a9d3-f9a8ef2a6045" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.38.28.png"><img style="width:420px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.38.28.png"/></a></figure><p id="bf051a29-99ee-4b02-9def-b690e53b1611" class="">появилось в процессе, то есть стало 2 кнопки бонусов и интерфейс поехал, так не должно быть</p><figure id="5dbd3cc2-8bd5-49bb-9a06-ef1d44b37252"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.53.43.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/a259b0d4-1bdc-4df3-98ec-027c342c53b4/CleanShot_2024-08-30_at_16.53.43.mp4</a></div></figure><p id="3f877954-6ba9-4319-9bda-92a055aaf1fe" class="">После этого появился бездеп бонус на основе депового, но без значений, хотя там должно было быть 8 + 8 * 200% = 24$</p><p id="4f50ed01-b1cb-4160-bca3-3f6c012acd7a" class="">Так же видно, что не получается его активировать через модалку, да и в принципе никак, просто висит сломанный бонус</p><h2 id="256d3811-c2f7-4642-8ba5-607f308888be" class="">flow отыгрыша бонуса</h2><figure id="c2544369-2031-4398-8ddf-3d1499050802"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-30_at_16.40.25.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/7f3cc740-eb4e-4b70-b6cf-0cf24e61cf65/CleanShot_2024-08-30_at_16.40.25.mp4</a></div></figure><p id="a9b4d23c-49e1-4522-ab80-92b7d421e725" class="">прогрессия бонуса не перемещается вместе с хедером, а должна</p><p id="89a98f45-0412-4fc8-8157-236ccc5393c2" class="">прогресс заполнен полностью, хотя должен быть нулевой и заполняться по мере отыгрыша как в десктопе</p><p id="c5881e79-c995-4514-9975-74a4cc6de8eb" class="">ВАЖНО! При истечении времени не было никакой модалки, что бонус сгорел</p><p id="d75fffe0-f72e-4c50-afeb-6603f6db597e" class="">При выигрыше бонуса также нет никай модалки</p><figure id="235afdee-f689-41ed-8c62-831e04dc8cb9"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.38.30.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/0fe99581-6d4a-487d-8c94-0eeb3731093d/CleanShot_2024-08-31_at_16.38.30.mp4</a></div></figure><p id="94403e87-4fea-4974-b3d6-8db1c171119b" class="">Дополнительно замечено странное поведение, когда на счету бонуса 0 денег становится после сделанной ставки, но выигрыш идет же все равно в счет бонуса - это хорошо, но плохо, что кошелек тоже начинает отображаться тогда</p><h2 id="79a0d119-0d78-4ce9-812e-b7c65d9f56fc" class="">фриспины</h2><figure id="d8a5fa54-8353-42d6-8f38-dc8f97722637"><div class="source"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_16.42.32.mp4">https://prod-files-secure.s3.us-west-2.amazonaws.com/b827db7b-19b0-47fa-83b5-1abecd224eb0/5e1ebb54-7c11-40d4-9009-1f9d561037af/CleanShot_2024-08-31_at_16.42.32.mp4</a></div></figure><p id="b2527695-a011-4aae-bf19-0fd9a0f1c9eb" class="">В принципе не могу проверить работают ли фриспины, тк бонус нельзя активировать</p><h2 id="1728c235-db38-4438-b107-ac788a389228" class="">промокод</h2><figure id="2a25b3d8-3058-4916-a097-1c2450328c82" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_17.01.09.png"><img style="width:383.991455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_17.01.09.png"/></a></figure><p id="5f62f67f-5837-42ad-a5e2-e27916785a31" class="">После ввода промокода, было уведомление, поле осталось “грязным” и нет никаких бонусов</p><figure id="159ff6a2-0aae-42b1-87a9-104c99f6d120" class="image"><a href="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_17.02.08.png"><img style="width:688.366455078125px" src="%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20fff81376345b80948a8cdddab26bb925/CleanShot_2024-08-31_at_17.02.08.png"/></a></figure><p id="94f8c4db-1239-4c6b-91aa-b3b9ca5aac55" class="">Обновив страницу несколько раз я увидел таки 3 бонуса из 4-ех указанных</p><h1 id="fff81376-345b-8090-af87-cb105af37fd9" class="">Уведомления</h1><p id="fa51edb0-8fb1-41ac-b96e-d4d0d5684483" class="">Рано проверять</p><p id="40d80619-eb60-4791-9522-39181339686e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
